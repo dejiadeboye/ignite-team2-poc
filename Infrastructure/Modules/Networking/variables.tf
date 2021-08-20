@@ -11,7 +11,12 @@ variable "cidr" {
   type        = list(any)
 }
 
-variable "subnets_number" {
+variable "pub_count" {
   description = "Number of subnets to create (independent from type)"
-  default     = 2
+  type        = number
+}
+
+variable "priv_count" {
+  description = "Number of subnets to create (independent from type)"
+  type        = number
 }

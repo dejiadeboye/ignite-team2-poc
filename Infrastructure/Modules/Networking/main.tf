@@ -23,13 +23,32 @@ data "aws_availability_zones" "az_availables" {
 
 # ------- Subnets Creation -------
 
+# ------- Public Subnets -------
+resource "aws_subnet" "public_subnets" {
+  count                   = var.pub_count
+  availability_zone       = data.aws_availability_zones.az_availables.names[count.index]
+  vpc_id                  = aws_vpc.aws_vpc.id
+  cidr_block              = cidrsubnet(aws_vpc.aws_vpc.cidr_block, 7, count.index + 1)
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "public_subnet_${count.index}_${var.name}"
+  }
+}
+
 # ------- Private Subnets -------
 resource "aws_subnet" "private_subnets" {
-  count             = 2
+  count             = var.priv_count
   availability_zone = data.aws_availability_zones.az_availables.names[count.index]
   vpc_id            = aws_vpc.aws_vpc.id
   cidr_block        = cidrsubnet(aws_vpc.aws_vpc.cidr_block, 7, count.index + 3)
   tags = {
     Name = "private_subnet_${count.index}_${var.name}"
   }
+}
+
+# ------- Public Subnets Association -------
+resource "aws_route_table_association" "rt_assoc_pub_subnets" {
+  count          = var.pub_count
+  subnet_id      = aws_subnet.public_subnets[count.index].id
+  route_table_id = aws_vpc.aws_vpc.main_route_table_id
 }

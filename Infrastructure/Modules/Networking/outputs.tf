@@ -5,7 +5,7 @@ output "aws_vpc" {
   value = aws_vpc.aws_vpc.id
 }
 
-
-output "private_subnets" {
-  value = [aws_subnet.private_subnets_client[0].id, aws_subnet.private_subnets_client[1].id]
+output "aws_rt" {
+  value = aws_vpc.aws_vpc.default_route_table_id
 }
+

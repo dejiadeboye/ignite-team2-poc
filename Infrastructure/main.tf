@@ -31,23 +31,37 @@ module "networking1" {
   source = "./Modules/Networking"
   cidr   = ["10.120.0.0/16"]
   name   = "Production"
+  priv_count = 2
+  pub_count = 0
 }
 
 module "networking2" {
   source = "./Modules/Networking"
   cidr   = ["10.121.0.0/16"]
   name   = "Staging"
+  priv_count = 2
+  pub_count = 0
 }
 
 module "networking3" {
   source = "./Modules/Networking"
   cidr   = ["10.122.0.0/16"]
   name   = "Development"
+  priv_count = 2
+  pub_count = 0
 }
 
 module "networking5" {
   source = "./Modules/Networking"
   cidr   = ["10.123.0.0/16"]
   name   = "SharedServices"
+  priv_count = 1
+  pub_count  = 1
 }
 
+module "IGW" {
+  source = "./Modules/IGW"
+  vpc    = module.networking5.aws_vpc
+  name   = "Shared_Services"
+  default_route_table = module.networking5.aws_rt
+}

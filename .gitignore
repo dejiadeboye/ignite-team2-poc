@@ -1,1 +1,4 @@
 Infrastructure/details.tfvars
+Infrastructure/.terraform/modules/modules.json
+Infrastructure/.terraform/providers/registry.terraform.io/hashicorp/aws/3.53.0/windows_386/terraform-provider-aws_v3.53.0_x5.exe
+Infrastructure/.terraform/providers/registry.terraform.io/hashicorp/random/3.1.0/windows_386/terraform-provider-random_v3.1.0_x5.exe

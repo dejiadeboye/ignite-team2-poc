@@ -12,7 +12,7 @@ variable "cidr" {
 }
 
 variable "pub_count" {
-  description = "Number of subnets to create (independent from type)"
+  description = "Number of public subnets to create (independent from type)"
   type        = number
 }
 

@@ -20,3 +20,8 @@ variable "priv_count" {
   description = "Number of subnets to create (independent from type)"
   type        = number
 }
+
+variable "transitid" {
+  description = "Transit Gateway ID"
+  type        = string
+}

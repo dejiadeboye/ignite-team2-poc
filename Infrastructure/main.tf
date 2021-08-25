@@ -33,6 +33,7 @@ module "networking1" {
   name   = "Production"
   priv_count = 2
   pub_count = 0
+  transitid = module.tgw.tgw_id
 }
 
 module "networking2" {
@@ -41,6 +42,7 @@ module "networking2" {
   name   = "Staging"
   priv_count = 2
   pub_count = 0
+  transitid = module.tgw.tgw_id
 }
 
 module "networking3" {
@@ -49,6 +51,7 @@ module "networking3" {
   name   = "Development"
   priv_count = 2
   pub_count = 0
+  transitid = module.tgw.tgw_id
 }
 
 module "networking5" {
@@ -57,6 +60,7 @@ module "networking5" {
   name   = "SharedServices"
   priv_count = 1
   pub_count  = 1
+  transitid = module.tgw.tgw_id
 }
 
 module "IGW" {
@@ -64,4 +68,10 @@ module "IGW" {
   vpc    = module.networking5.aws_vpc
   name   = "Shared_Services"
   default_route_table = module.networking5.aws_rt
+}
+
+module "tgw" {
+  source = "./Modules/TransitGateway"
+  name   = "poc"
+ 
 }

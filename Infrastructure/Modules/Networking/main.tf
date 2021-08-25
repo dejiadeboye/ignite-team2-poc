@@ -52,3 +52,12 @@ resource "aws_route_table_association" "rt_assoc_pub_subnets" {
   subnet_id      = aws_subnet.public_subnets[count.index].id
   route_table_id = aws_vpc.aws_vpc.main_route_table_id
 }
+
+resource "aws_ec2_transit_gateway_vpc_attachment" "transit_gateway" {
+  subnet_ids         = [aws_subnet.private_subnets[0].id]
+  transit_gateway_id = var.transitid
+  vpc_id             = aws_vpc.aws_vpc.id
+  tags = {
+    Name = "tgw_${var.name}"
+  }
+}

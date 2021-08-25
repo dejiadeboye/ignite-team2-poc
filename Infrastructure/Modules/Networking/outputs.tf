@@ -9,3 +9,12 @@ output "aws_rt" {
   value = aws_vpc.aws_vpc.default_route_table_id
 }
 
+output "public_subnets" {
+  value = join("",aws_subnet.public_subnets[*].id)
+
+}
+
+output "private_subnets" {
+  value = join("",aws_subnet.private_subnets[*].id)
+
+}
